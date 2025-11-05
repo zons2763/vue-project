@@ -4,6 +4,7 @@ import JobListing from "@/components/JobListing.vue";
 import { reactive, defineProps, onMounted } from "vue";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import axios from "axios";
+import jobsData from "@/jobs.json"; // use static JSON for GitHub Pages demo
 
 defineProps({
   limit: Number,
@@ -20,8 +21,9 @@ const state = reactive({
 
 onMounted(async () => {
   try {
-    const response = await axios.get("/api/jobs");
-    state.jobs = response.data;
+    // const response = await axios.get("/api/jobs");
+    // state.jobs = response.data;
+    state.jobs = jobsData.jobs || jobsData; // adapt to file shape
   } catch (error) {
     console.error("Error fetching jobs:", error);
   } finally {
